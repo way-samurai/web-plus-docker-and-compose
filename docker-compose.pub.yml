@@ -3,9 +3,7 @@ version: '3'
 services:
   backend:
     container_name: 'kupipodariday-backend'
-    build:
-      context: backend
-      dockerfile: Dockerfile.pub
+    image: waysamurai/kupipodariday-backend:1.0.0
     env_file: .env
     restart: always
     ports:
@@ -17,9 +15,7 @@ services:
 
   frontend:
     container_name: 'kupipodariday-frontend'
-    build:
-      context: frontend
-      dockerfile: Dockerfile.pub
+    image:  waysamurai/kupipodariday-frontend:1.0.0
     restart: always
     ports:
       - '8081:80'

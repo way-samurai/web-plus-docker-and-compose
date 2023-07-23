@@ -16,7 +16,7 @@ services:
       - '4000:3000'
     depends_on:
       - postgres
-    networks: 
+    networks:
       - backend
 
   frontend:
@@ -31,7 +31,7 @@ services:
     restart: always
     env_file: .env
     environment:
-      CHOKIDAR-USEPOOLING: "true"
+      CHOKIDAR-USEPOOLING: 'true'
     ports:
       - '3001:3000'
     networks:
@@ -42,24 +42,24 @@ services:
     image: postgres:12.12-alpine
     restart: always
     env_file: .env
-    volumes: 
+    volumes:
       - ~/pg_data:/var/lib/postgresql/data
-    
+
     networks:
       - backend
 
   adminer:
     image: adminer
     restart: always
-    ports: 
+    ports:
       - 8080:8080
     depends_on:
-      - postgres  
-    networks: 
+      - postgres
+    networks:
       - backend
 
-volumes: 
-  postgres_data: 
+volumes:
+  postgres_data:
 
 networks:
   backend:
