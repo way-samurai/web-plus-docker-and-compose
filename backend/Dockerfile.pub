@@ -7,7 +7,6 @@ RUN npm run build \
     rm -rf ./src \
     rm -rf node ./node_modules
 
-#Этап развертывания приложения через утилиту PM2
 FROM node:16.15-alpine AS backend
 WORKDIR /app
 COPY package*.json ./
@@ -16,4 +15,4 @@ COPY --from=builder /app/dist ./dist
 COPY ./ecosystem.config.js ./
 EXPOSE 3000
 
-CMD [ "pm2-runtime", "start", "ecosystem.config.js" ]
+CMD ["pm2-runtime", "start", "ecosystem.config.js"]
