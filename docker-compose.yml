@@ -3,38 +3,42 @@ version: '3'
 services:
   backend:
     container_name: backend
-    image: waysamurai/kupipodariday-backend:1.0.0
+    build:
+      context: backend
+      dockerfile: Dockerfile.dev
+    image: backend
     env_file: .env
     environment: 
       CHOKIDAR_USEPOLLING: "true"
-    volumes:
-      - type: bind
-        source: ./backend/src
-        target: /app/src
-    restart: always
     ports:
       - '4000:3000'
     depends_on:
       - postgres
+    restart: always
+    volumes:
+      - type: bind
+        source: ./backend/src
+        target: /app/src
     networks:
       - backend
-
   frontend:
-    container_name: 'frontend'
-    image:  waysamurai/kupipodariday-frontend:1.0.0
+    container_name: frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile.dev
+    image: frontend
     env_file: .env
-    environment:
-      CHOKIDAR-USEPOOLING: 'true'
+    environment: 
+      CHOKIDAR_USEPOLLING: "true"
+    ports:
+      - '3001:3000'
+    restart: always
     volumes:
       - type: bind
         source: ./frontend/src
         target: /app/src
-    restart: always
-    ports:
-      - '3001:3000'
     networks:
       - frontend
-
   postgres:
     container_name: postgres
     image: postgres:14-alpine
@@ -44,7 +48,6 @@ services:
       - postgres_data:/data/postgres
     networks:
       - backend
-      
   adminer:
     image: adminer
     restart: always
@@ -54,10 +57,8 @@ services:
       - postgres
     networks:
       - backend
-
 volumes:
   postgres_data:
-
 networks:
   backend:
   frontend:
