@@ -8,14 +8,14 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
-  app.enableCors({
-    origin: [
-      'https://kupiprodai-samurai.nomoredomains.xyz',
-      'http://kupiprodai-samurai.nomoredomains.xyz',
-    ],
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-    allowedHeaders: ['authorization', 'content-type'],
-  });
+  // app.enableCors({
+  //   origin: [
+  //     'https://kupiprodai-samurai.nomoredomains.xyz',
+  //     'http://kupiprodai-samurai.nomoredomains.xyz',
+  //   ],
+  //   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  //   allowedHeaders: ['authorization', 'content-type'],
+  // });
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
   app.use(cookieParser());
