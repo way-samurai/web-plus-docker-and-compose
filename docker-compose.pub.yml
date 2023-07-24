@@ -3,10 +3,7 @@ version: '3'
 services:
   backend:
     container_name: backend
-    build:
-      context: backend
-      dockerfile: Dockerfile.pub
-    image: backend-release:1.0.0
+    image: waysamurai/kupipodariday-backend:1.0.2
     env_file: .env
     ports:
       - '4000:3000'
@@ -17,10 +14,7 @@ services:
       - backend
   frontend:
     container_name: frontend
-    build:
-      context: frontend
-      dockerfile: Dockerfile.pub
-    image: frontend-release:1.0.0
+    image:  waysamurai/kupipodariday-frontend:1.0.2
     env_file: .env
     ports:
       - '8081:80'

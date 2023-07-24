@@ -3,7 +3,10 @@ version: '3'
 services:
   backend:
     container_name: backend
-    image: waysamurai/kupipodariday-backend:1.0.1
+    build:
+      context: backend
+      dockerfile: Dockerfile.pub
+    image: backend-release:1.0.2
     env_file: .env
     environment: 
       CHOKIDAR_USEPOLLING: "true"
@@ -21,7 +24,10 @@ services:
       
   frontend:
     container_name: frontend
-    image:  waysamurai/kupipodariday-frontend:1.0.1
+    build:
+      context: frontend
+      dockerfile: Dockerfile.pub
+    image: frontend-release:1.0.2
     env_file: .env
     environment: 
       CHOKIDAR_USEPOLLING: "true"
