@@ -9,7 +9,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://kupiprodai-samurai.nomoredomains.xyz',
+    origin: 'https://kupiprodai-samurai.nomoredomains.xyz',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
