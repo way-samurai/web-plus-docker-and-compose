@@ -1,14 +1,6 @@
-FROM node:16-alpine AS builder
+FROM node:16.15-alpine
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
-COPY . .
-RUN npm run build
-
-FROM node:16-alpine AS backend
-WORKDIR /app
-COPY package*.json .
-RUN npm ci 
-COPY . .
-EXPOSE 3000
-CMD ["npm", "run", "start"]
+COPY . ./
+CMD ["npm", "run", "start:dev"]

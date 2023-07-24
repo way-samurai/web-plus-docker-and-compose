@@ -7,15 +7,11 @@ import * as cookieParser from 'cookie-parser';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
-  // app.enableCors({
-  //   origin: [
-  //     'https://kupiprodai-samurai.nomoredomains.xyz',
-  //     'http://kupiprodai-samurai.nomoredomains.xyz',
-  //   ],
-  //   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
-  //   allowedHeaders: ['authorization', 'content-type'],
-  // });
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    credentials: true,
+    origin: true,
+  });
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
   app.use(cookieParser());

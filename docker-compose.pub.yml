@@ -2,7 +2,7 @@ version: '3'
 
 services:
   backend:
-    container_name: 'kupipodariday-backend'
+    container_name: 'backend'
     image: waysamurai/kupipodariday-backend:1.0.0
     env_file: .env
     restart: always
@@ -14,22 +14,22 @@ services:
       - backend
 
   frontend:
-    container_name: 'kupipodariday-frontend'
+    container_name: 'frontend'
     image:  waysamurai/kupipodariday-frontend:1.0.0
-    restart: always
+    env_file: .env
     ports:
       - '3001:80'
+    restart: always
     networks:
       - frontend
 
   postgres:
     container_name: 'kupipodariday-database'
-    image: postgres:12.12-alpine
-    restart: always
+    image: postgres:14-alpine
     env_file: .env
-    volumes: 
-      - ~/pg_data:/var/lib/postgresql/data
-    
+    restart: always
+    volumes:
+      - postgres_data:/data/postgres
     networks:
       - backend
 
