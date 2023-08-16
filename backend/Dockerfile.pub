@@ -1,4 +1,4 @@
-FROM node:16.15-alpine AS builder
+FROM node:16.20.2-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -7,7 +7,7 @@ RUN npm run build \
     rm -rf ./src \
     rm -rf node ./node_modules
 
-FROM node:16.15-alpine AS backend
+FROM node:16.20.2-alpine AS backend
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev --no-audit --no-fond && npm install -g pm2
